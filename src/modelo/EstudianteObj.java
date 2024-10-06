@@ -61,5 +61,9 @@ public class EstudianteObj {
     public void setApMaterno(String apMaterno) {
         this.apMaterno = apMaterno;
     }
+
+    public Object get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

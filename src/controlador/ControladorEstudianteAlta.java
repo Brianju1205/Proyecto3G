@@ -21,20 +21,27 @@ public class ControladorEstudianteAlta implements ActionListener  {
     OperacionesListaEstudianteCRUD objListaEstudiante;
     Validador objValidador;
     EstudianteObj objEstudiante;
-    ArrayList<EstudianteObj> listaEstudiante;
+    ArrayList<EstudianteObj> listaEst;
+    EstudianteConsulta objEstudianteConsulta;
     
+    ControladorConsultaEstudiante objConsulta;
     public ControladorEstudianteAlta(EstudianteAlta objEstudianteAlta){
-        listaEstudiante = new ArrayList();
+        listaEst = new ArrayList();
+        objValidador = new Validador();
         this.objEstudianteAlta = objEstudianteAlta;
         this.objEstudianteAlta.jButton1.addActionListener(this);
+        this.objEstudianteAlta.jButton2Consulta.addActionListener(this);
         //jButton1 se paso a publico para agregarle su escuchador
-        objValidador = new Validador();
-        objListaEstudiante = new OperacionesListaEstudianteCRUD();
         
+        this.objConsulta =objConsulta;
+       
+        objListaEstudiante = new OperacionesListaEstudianteCRUD();
+        //objEstudianteConsulta = new EstudianteConsulta();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==objEstudianteAlta.jButton1){
+            
             System.out.println("Escuchador del boton");
             
             if (!objValidador.validaCajaTextoEntero(objEstudianteAlta.getjTextField1())) {
@@ -53,36 +60,42 @@ public class ControladorEstudianteAlta implements ActionListener  {
                 return;
             }
         objEstudiante = new EstudianteObj();
-        /*System.out.println("Escuchador del boton");
-        System.out.println("Matricula: " + Integer.parseInt(objEstudianteAlta.getjTextField1().getText()));
-        System.out.println("Nombre: " + objEstudianteAlta.getjTextField2().getText());
-        System.out.println("Apellido paterno: " + objEstudianteAlta.getjTextField3().getText());
-        System.out.println("Apellido materno: " + objEstudianteAlta.getjTextField4().getText());
-        System.out.println("Edad: " + Integer.parseInt(objEstudianteAlta.getjTextField5().getText()));*/
-         
+       
         objEstudiante.setMatricula(Integer.parseInt(objEstudianteAlta.getjTextField1().getText()));
         objEstudiante.setNombre(objEstudianteAlta.getjTextField2().getText());
         objEstudiante.setApPaterno(objEstudianteAlta.getjTextField3().getText());
         objEstudiante.setApMaterno(objEstudianteAlta.getjTextField4().getText());
         objEstudiante.setEdad(Integer.parseInt(objEstudianteAlta.getjTextField5().getText()));
+        
+        objListaEstudiante.setObjEstudiante(objEstudiante);
+        listaEst.add(objEstudiante);
+        objListaEstudiante.create(); 
+        //this.objListaEstudiante.read();
         this.limpiar();
-        listaEstudiante.add(objEstudiante);
-        
-        this.objListaEstudiante.setObjEstudiante(objEstudiante);
-        this.objListaEstudiante.create();  
-        this.objListaEstudiante.read();
-        
-       // this.imprimirLista();
+        // this.imprimirLista();
 
         System.out.println("Valores del Objeto");
         System.out.println("Matricula: " + objEstudiante.getMatricula());
+        
+        //objEstudianteConsulta.actualizarTabla(objListaEstudiante.getObjListaEstudiante());
+          //objConsulta.actualizarTabla(objListaEstudiante.getObjListaEstudiante());
          
-         EstudianteConsulta consulta = new EstudianteConsulta();
-         ControladorConsultaEstudiante ControladorConsulta= new ControladorConsultaEstudiante();
-         consulta.actualizarTabla(listaEstudiante);
-         //ControladorConsulta.actualizarTabla(listaEstudiante);
-         consulta.setVisible(true);
+         //ControladorConsultaEstudiante ControladorConsulta= new ControladorConsultaEstudiante();
+         //consulta.actualizarTabla(listaEstudiante);
+        //ControladorConsulta.actualizarTabla(listaEstudiante);
+        // consulta.setVisible(true);
         }
+        if(e.getSource()==objEstudianteAlta.jButton2Consulta){
+             if(objEstudianteConsulta == null){
+                objEstudianteConsulta = new EstudianteConsulta(this.objListaEstudiante);
+                objEstudianteConsulta.setSize(500, 500);
+                objEstudianteConsulta.setVisible(true);
+                }else{
+                    objEstudianteConsulta.llenado();
+                    objEstudianteConsulta.setVisible(true);
+                }
+        }
+        
     }
 
      public void limpiar(){

@@ -12,6 +12,7 @@ import modelo.EstudianteObj;
 import controlador.Validador;
 import javax.swing.JTextField;
 import controlador.OperacionesListaEstudianteCRUD;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -24,13 +25,15 @@ public class EstudianteAlta extends javax.swing.JFrame {
      */
     public Validador objValidador;
     EstudianteObj objEstudiante;
-    ArrayList<EstudianteObj> listaEstudiante;
+    ArrayList<EstudianteObj> listaEst;
     ControladorEstudianteAlta objControlador;
     public EstudianteAlta() {
         initComponents();
-        objValidador = new Validador();
-        listaEstudiante = new ArrayList();
         objControlador = new ControladorEstudianteAlta(this);
+        objValidador = new Validador();
+        objEstudiante= new EstudianteObj();
+        listaEst = new ArrayList();
+        
         
     }
     
@@ -79,6 +82,7 @@ public class EstudianteAlta extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jButton2Consulta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,7 +130,7 @@ public class EstudianteAlta extends javax.swing.JFrame {
 
         jButton1.setText("GUARDAR");
         jPanel1.add(jButton1);
-        jButton1.setBounds(140, 260, 90, 23);
+        jButton1.setBounds(190, 260, 90, 23);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +166,10 @@ public class EstudianteAlta extends javax.swing.JFrame {
         jPanel1.add(jTextField5);
         jTextField5.setBounds(181, 210, 110, 22);
 
+        jButton2Consulta.setText("CONSULTA");
+        jPanel1.add(jButton2Consulta);
+        jButton2Consulta.setBounds(40, 260, 100, 23);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,44 +198,6 @@ public class EstudianteAlta extends javax.swing.JFrame {
         return true;
     }
 
-    /*public void validaCamposTexto2() {
-        if (!objValidador.validaCajaTextoEntero(jTextField1)) {
-            return;
-        }
-        if (!objValidador.validaCajaTextoCadena(jTextField2)) {
-            return;
-        }
-        if (!objValidador.validaCajaTextoCadena(jTextField3)) {
-            return;
-        }
-        if (!objValidador.validaCajaTextoCadena(jTextField4)) {
-            return;
-        }
-        if (!objValidador.validaCajaTextoEnteroEdad(jTextField5)) {
-            return;
-        }
-        // objValidador.validaCadena(jTextField1.getText());
-    }  */  
-   /* public void imprimirLista(){
-        EstudianteObj objAuxiliar = null;
-        System.out.println("Valores de los objetos");
-        for(int i=0; i<listaEstudiante.size(); i++){
-            objAuxiliar = listaEstudiante.get(i);
-            System.out.println("Matricula: "+objAuxiliar.getMatricula());
-            System.out.println("Nombre: "+objAuxiliar.getNombre());
-            System.out.println("Apellido Paterno: "+objAuxiliar.getApPaterno());
-            System.out.println("Apellido Materno: "+objAuxiliar.getApMaterno());
-            System.out.println("Edad: "+objAuxiliar.getEdad());
-        
-        }
-    }*/
-    /*public void limpiar(){
-        this.jTextField1.setText("");
-        this.jTextField2.setText("");
-        this.jTextField3.setText("");
-        this.jTextField4.setText("");
-        this.jTextField5.setText("");
-    }*/
     
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -288,6 +258,7 @@ public class EstudianteAlta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2Consulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -302,8 +273,5 @@ public class EstudianteAlta extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
-    /*public void setobjEstudiante(EstudianteObj objEstudiante) {
-        listaEstudiante.add(objEstudiante);
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
+   
 }

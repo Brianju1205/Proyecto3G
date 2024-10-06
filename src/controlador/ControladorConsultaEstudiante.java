@@ -7,8 +7,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JTable;
+
+import controlador.OperacionesListaEstudianteCRUD;
 import javax.swing.table.DefaultTableModel;
 import modelo.EstudianteObj;
 import vista.EstudianteAlta;
@@ -19,35 +19,42 @@ import vista.EstudianteConsulta;
  */
 public class ControladorConsultaEstudiante implements ActionListener {
  
-    
-    
-
-    public ControladorConsultaEstudiante() {
-          
-        
+    EstudianteConsulta objEstudianteConsulta;
+    OperacionesListaEstudianteCRUD ObjEstudianteLista;
+    EstudianteObj objEstudiante;
+    public ControladorConsultaEstudiante(EstudianteConsulta objEstudianteConsulta) {
+        this.objEstudianteConsulta = objEstudianteConsulta;
+        this.ObjEstudianteLista= new OperacionesListaEstudianteCRUD();
+        this.objEstudianteConsulta.jButton2.addActionListener(this);
+       // this.objEstudianteConsulta.jTable1.add(objEstudianteConsulta);
+        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);
+       
+            
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      
+        if (e.getSource() == this.objEstudianteConsulta.jButton2) {
+            System.out.println("Escuchador del boton Agregar");
+           /* DefaultTableModel objModeloTable = (DefaultTableModel) objEstudianteConsulta.jTable1.getModel(); //convertir por eso va lo de 
+            objModeloTable.addRow(new Object[]{"1", "1", "1", "1"});*/
+        }
+        
+        if (e.getSource() == this.objEstudianteConsulta.jButton1Alta) {
+             EstudianteAlta alta = new EstudianteAlta();
+             alta.setSize(500,500);
+             alta.setVisible(true);
+             System.out.println("Escuchador volver a alta");
+                   
+        }
        
     }
-   /*public void actualizarTabla(ArrayList<EstudianteObj> listaEstudiante) {
-         DefaultTableModel objModeloTabla = (DefaultTableModel) this.jTable1.getModel();
-         objModeloTabla.setRowCount(0); 
-         for (int i = 0; i < listaEstudiante.size(); i++) {
-            
-               EstudianteObj estudiante = listaEstudiante.get(i); 
-               objModeloTabla.addRow(new Object[]{
-               estudiante.getMatricula(),
-               estudiante.getNombre(), 
-               estudiante.getApPaterno(),
-               estudiante.getApMaterno()});
-         }
-}
+
     public void consultaEstudiante() {
         EstudianteAlta alta = new EstudianteAlta();
+        alta.setSize(500,500);
         alta.setVisible(true);
-    }*/
+    }
+    
     
 }

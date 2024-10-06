@@ -7,7 +7,7 @@ import modelo.EstudianteObj;
 public class OperacionesListaEstudianteCRUD extends CRUD {
     
     private ArrayList<EstudianteObj> objListaEstudiante;
-    private EstudianteObj objEstudiante;
+            EstudianteObj objEstudiante;
 
     public OperacionesListaEstudianteCRUD() {
             objListaEstudiante = new ArrayList<>();
@@ -19,18 +19,8 @@ public class OperacionesListaEstudianteCRUD extends CRUD {
     }
 
     @Override
-    public void read() {
-            EstudianteObj objAuxiliar;
-        System.out.println("Valores del Crud, Read:");
-        for (int i=0; i<objListaEstudiante.size(); i++) {
-            objAuxiliar=objListaEstudiante.get(i);
-            System.out.println("Matricula: " + objAuxiliar.getMatricula());
-            System.out.println("Nombre: " + objAuxiliar.getNombre());
-            System.out.println("Apellido Paterno: " + objAuxiliar.getApPaterno());
-            System.out.println("Apellido Materno: " + objAuxiliar.getApMaterno());
-            System.out.println("Edad: " + objAuxiliar.getEdad());
-            System.out.println("------------------------------------");
-        }
+    public ArrayList read() {
+            return objListaEstudiante;
     }
 
     @Override

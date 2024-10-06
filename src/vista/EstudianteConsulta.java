@@ -8,10 +8,7 @@ import controlador.ControladorConsultaEstudiante;
 import javax.swing.table.DefaultTableModel;
 import controlador.OperacionesListaEstudianteCRUD;
 import java.util.ArrayList;
-import javax.swing.ButtonModel;
-import javax.swing.table.TableModel;
 import modelo.EstudianteObj;
-import vista.EstudianteAlta;
 
 /**
  *
@@ -22,15 +19,24 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     /**
      * Creates new form EstudianteConsulta
      */
-    ControladorConsultaEstudiante controlador;
-    OperacionesListaEstudianteCRUD ObjListaEstudiante;
-    EstudianteObj objEstudiante;
-    public EstudianteConsulta() {
+   
+    OperacionesListaEstudianteCRUD objListaEst;
+    ControladorConsultaEstudiante objControladorEstudiante;
+    
+    //EstudianteObj objEstudiante;
+    public EstudianteConsulta( ) {
         initComponents();
-        controlador = new ControladorConsultaEstudiante();
-        ObjListaEstudiante = new OperacionesListaEstudianteCRUD();    
+        objControladorEstudiante = new ControladorConsultaEstudiante(this);
+         
+       
     }
-
+    public EstudianteConsulta(OperacionesListaEstudianteCRUD objListaEst) {
+        initComponents();
+        objControladorEstudiante = new ControladorConsultaEstudiante(this);  
+        this.objListaEst=objListaEst;
+        llenado();
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +50,7 @@ public class EstudianteConsulta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton1Alta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,12 +66,9 @@ public class EstudianteConsulta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jButton2.setText("AGREGAR ");
+
+        jButton1Alta.setText("Alta");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,7 +79,9 @@ public class EstudianteConsulta extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+                .addGap(48, 48, 48)
+                .addComponent(jButton1Alta)
+                .addGap(34, 34, 34)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -85,7 +91,9 @@ public class EstudianteConsulta extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1Alta))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -104,13 +112,32 @@ public class EstudianteConsulta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        EstudianteAlta alta = new EstudianteAlta();
-        alta.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-     /* public void actualizarTabla(){
+     public void llenado(){
+        DefaultTableModel modelo = (DefaultTableModel) this.jTable1.getModel();
+        modelo.setRowCount(0);
+        ArrayList<EstudianteObj> objListaEstudianteLocal =  objListaEst.read();
+        
+        for(int i=0;i<objListaEstudianteLocal.size(); i++){
+            modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
+                objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
+                objListaEstudianteLocal.get(i).getEdad()});
+        }
+       /* for(int i=0;i<ObjLista.objListaEstudiante.size(); i++){
+            modelo.addRow(new Object[]{
+            ObjLista.objListaEstudiante.get(i).getMatricula(),
+            ObjLista.objListaEstudiante.get(i).getNombre(),
+            ObjLista.objListaEstudiante.get(i).getApPaterno(),
+            ObjLista.objListaEstudiante.get(i).getApMaterno()
+        });
+        }*/
+        
+    }
+    /*public void llenado(){
+        DefaultTableModel modelo = (DefaultTableModel)this.tablaAlumnos.getModel();
+        modelo.addRow(new Object[]{
+            objLista.objListaAlumno.get(0).getMatricula(),objLista.objListaAlumno.get(0).getNombre()});
+*/
+    /* public void actualizarTabla(){
         DefaultTableModel objModeloTabla = (DefaultTableModel) this.jTable1.getModel();
        
         ArrayList<EstudianteObj> objListaEstudiante =ObjListaEstudiante.getObjListaEstudiante();
@@ -128,19 +155,7 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     }
         this.jButton1.setModel((ButtonModel) objListaEstudiante);
 }  */
-    public void actualizarTabla(ArrayList<EstudianteObj> listaEstudiante) {
-         DefaultTableModel objModeloTabla = (DefaultTableModel) this.jTable1.getModel();
-         objModeloTabla.setRowCount(0); 
-         for (int i = 0; i < listaEstudiante.size(); i++) {
-            
-               EstudianteObj estudiante = listaEstudiante.get(i); 
-               objModeloTabla.addRow(new Object[]{
-               estudiante.getMatricula(),
-               estudiante.getNombre(), 
-               estudiante.getApPaterno(),
-               estudiante.getApMaterno()});
-         }
-}    
+   
     /**
      * @param args the command line arguments
      */
@@ -178,9 +193,14 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButton1Alta;
     public javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+   
+
+   
 }
