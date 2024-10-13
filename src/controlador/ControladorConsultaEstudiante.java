@@ -7,7 +7,6 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import controlador.OperacionesListaEstudianteCRUD;
 import javax.swing.table.DefaultTableModel;
 import modelo.EstudianteObj;
@@ -22,12 +21,16 @@ public class ControladorConsultaEstudiante implements ActionListener {
     EstudianteConsulta objEstudianteConsulta;
     OperacionesListaEstudianteCRUD ObjEstudianteLista;
     EstudianteObj objEstudiante;
-    public ControladorConsultaEstudiante(EstudianteConsulta objEstudianteConsulta) {
+    OperacionesListaEstudianteCRUD objListaEst;
+    
+    public ControladorConsultaEstudiante(EstudianteConsulta objEstudianteConsulta,OperacionesListaEstudianteCRUD objListaEst) {
         this.objEstudianteConsulta = objEstudianteConsulta;
         this.ObjEstudianteLista= new OperacionesListaEstudianteCRUD();
+        this.objListaEst = objListaEst;
         this.objEstudianteConsulta.jButton2.addActionListener(this);
        // this.objEstudianteConsulta.jTable1.add(objEstudianteConsulta);
         this.objEstudianteConsulta.jButton1Alta.addActionListener(this);
+        
        
             
     }
@@ -36,8 +39,10 @@ public class ControladorConsultaEstudiante implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.objEstudianteConsulta.jButton2) {
             System.out.println("Escuchador del boton Agregar");
+            llenado();
            /* DefaultTableModel objModeloTable = (DefaultTableModel) objEstudianteConsulta.jTable1.getModel(); //convertir por eso va lo de 
             objModeloTable.addRow(new Object[]{"1", "1", "1", "1"});*/
+           
         }
         
         if (e.getSource() == this.objEstudianteConsulta.jButton1Alta) {
@@ -54,6 +59,19 @@ public class ControladorConsultaEstudiante implements ActionListener {
         EstudianteAlta alta = new EstudianteAlta();
         alta.setSize(500,500);
         alta.setVisible(true);
+    }
+    public void llenado(){
+        DefaultTableModel modelo = (DefaultTableModel) objEstudianteConsulta.jTable1.getModel();
+        modelo.setRowCount(0);
+        ArrayList<EstudianteObj> objListaEstudianteLocal =  objListaEst.read();
+        
+        for(int i=0;i<objListaEstudianteLocal.size(); i++){
+            modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
+                objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
+                objListaEstudianteLocal.get(i).getEdad()});
+        }
+      
+        
     }
     
     

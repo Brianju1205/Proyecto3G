@@ -37,7 +37,6 @@ public class EstudianteAlta extends javax.swing.JFrame {
         
     }
     
-
     public JTextField getjTextField1() {
         return jTextField1;
     }

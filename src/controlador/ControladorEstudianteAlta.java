@@ -15,6 +15,7 @@ import vista.EstudianteConsulta;
 /**
  *
  * @author juare
+ * 
  */
 public class ControladorEstudianteAlta implements ActionListener  {
     EstudianteAlta objEstudianteAlta;
@@ -77,21 +78,16 @@ public class ControladorEstudianteAlta implements ActionListener  {
         System.out.println("Valores del Objeto");
         System.out.println("Matricula: " + objEstudiante.getMatricula());
         
-        //objEstudianteConsulta.actualizarTabla(objListaEstudiante.getObjListaEstudiante());
-          //objConsulta.actualizarTabla(objListaEstudiante.getObjListaEstudiante());
-         
-         //ControladorConsultaEstudiante ControladorConsulta= new ControladorConsultaEstudiante();
-         //consulta.actualizarTabla(listaEstudiante);
-        //ControladorConsulta.actualizarTabla(listaEstudiante);
-        // consulta.setVisible(true);
         }
         if(e.getSource()==objEstudianteAlta.jButton2Consulta){
              if(objEstudianteConsulta == null){
-                objEstudianteConsulta = new EstudianteConsulta(this.objListaEstudiante);
+               // objEstudianteConsulta = new EstudianteConsulta(this.objListaEstudiante);
+               objEstudianteConsulta = new EstudianteConsulta();
+                objConsulta = new ControladorConsultaEstudiante(objEstudianteConsulta, objListaEstudiante);
                 objEstudianteConsulta.setSize(500, 500);
                 objEstudianteConsulta.setVisible(true);
                 }else{
-                    objEstudianteConsulta.llenado();
+                    objConsulta.llenado();
                     objEstudianteConsulta.setVisible(true);
                 }
         }

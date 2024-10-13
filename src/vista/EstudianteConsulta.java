@@ -26,16 +26,16 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     //EstudianteObj objEstudiante;
     public EstudianteConsulta( ) {
         initComponents();
-        objControladorEstudiante = new ControladorConsultaEstudiante(this);
+        //objControladorEstudiante = new ControladorConsultaEstudiante(this);
          
        
     }
-    public EstudianteConsulta(OperacionesListaEstudianteCRUD objListaEst) {
+    /*public EstudianteConsulta(OperacionesListaEstudianteCRUD objListaEst) {
         initComponents();
         objControladorEstudiante = new ControladorConsultaEstudiante(this);  
         this.objListaEst=objListaEst;
-        llenado();
-    }
+      //  llenado();
+    }*/
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,7 +112,7 @@ public class EstudianteConsulta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     public void llenado(){
+    /* public void llenado(){
         DefaultTableModel modelo = (DefaultTableModel) this.jTable1.getModel();
         modelo.setRowCount(0);
         ArrayList<EstudianteObj> objListaEstudianteLocal =  objListaEst.read();
@@ -122,39 +122,10 @@ public class EstudianteConsulta extends javax.swing.JFrame {
                 objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
                 objListaEstudianteLocal.get(i).getEdad()});
         }
-       /* for(int i=0;i<ObjLista.objListaEstudiante.size(); i++){
-            modelo.addRow(new Object[]{
-            ObjLista.objListaEstudiante.get(i).getMatricula(),
-            ObjLista.objListaEstudiante.get(i).getNombre(),
-            ObjLista.objListaEstudiante.get(i).getApPaterno(),
-            ObjLista.objListaEstudiante.get(i).getApMaterno()
-        });
-        }*/
+      
         
-    }
-    /*public void llenado(){
-        DefaultTableModel modelo = (DefaultTableModel)this.tablaAlumnos.getModel();
-        modelo.addRow(new Object[]{
-            objLista.objListaAlumno.get(0).getMatricula(),objLista.objListaAlumno.get(0).getNombre()});
-*/
-    /* public void actualizarTabla(){
-        DefaultTableModel objModeloTabla = (DefaultTableModel) this.jTable1.getModel();
-       
-        ArrayList<EstudianteObj> objListaEstudiante =ObjListaEstudiante.getObjListaEstudiante();
-        System.out.println("Cantidad de estudiantes: " + objListaEstudiante.size());
-        this.ObjListaEstudiante.read();
-        
-        for (int i = 0; i < objListaEstudiante.size(); i++) {
-            
-             EstudianteObj estudiante = objListaEstudiante.get(i); 
-             objModeloTabla.addRow(new Object[]{
-             estudiante.getMatricula(),
-             estudiante.getNombre(), 
-             estudiante.getApPaterno(),
-             estudiante.getApMaterno()});
-    }
-        this.jButton1.setModel((ButtonModel) objListaEstudiante);
-}  */
+    }*/
+   
    
     /**
      * @param args the command line arguments

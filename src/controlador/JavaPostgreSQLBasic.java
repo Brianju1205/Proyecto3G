@@ -26,9 +26,11 @@ public class JavaPostgreSQLBasic {
             // Database connect
             // Conectamos con la base de datos
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://192.168.0.26:5432/customerdb",
-                    "xulescode", "1234");
- 
+                   "jdbc:postgresql://127.0.0.1/postgres",
+                    "postgres", "1234");
+            /*connection = DriverManager.getConnection(
+                    "jdbc:postgresql://127.0.0.1/postgres",
+                    "postgres", "");*/
             boolean valid = connection.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");
         } catch (java.sql.SQLException sqle) {
