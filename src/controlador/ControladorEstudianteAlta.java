@@ -32,8 +32,7 @@ public class ControladorEstudianteAlta implements ActionListener  {
         this.objEstudianteAlta = objEstudianteAlta;
         this.objEstudianteAlta.jButton1.addActionListener(this);
         this.objEstudianteAlta.jButton2Consulta.addActionListener(this);
-        //jButton1 se paso a publico para agregarle su escuchador
-        
+        //jButton1 se paso a publico para agregarle su escuchador   
         this.objConsulta =objConsulta;
        
         objListaEstudiante = new OperacionesListaEstudianteCRUD();

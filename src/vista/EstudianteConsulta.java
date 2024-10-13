@@ -27,16 +27,8 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     public EstudianteConsulta( ) {
         initComponents();
         //objControladorEstudiante = new ControladorConsultaEstudiante(this);
-         
-       
+             
     }
-    /*public EstudianteConsulta(OperacionesListaEstudianteCRUD objListaEst) {
-        initComponents();
-        objControladorEstudiante = new ControladorConsultaEstudiante(this);  
-        this.objListaEst=objListaEst;
-      //  llenado();
-    }*/
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,21 +104,7 @@ public class EstudianteConsulta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    /* public void llenado(){
-        DefaultTableModel modelo = (DefaultTableModel) this.jTable1.getModel();
-        modelo.setRowCount(0);
-        ArrayList<EstudianteObj> objListaEstudianteLocal =  objListaEst.read();
-        
-        for(int i=0;i<objListaEstudianteLocal.size(); i++){
-            modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
-                objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
-                objListaEstudianteLocal.get(i).getEdad()});
-        }
-      
-        
-    }*/
-   
-   
+
     /**
      * @param args the command line arguments
      */

@@ -29,22 +29,15 @@ public class ControladorConsultaEstudiante implements ActionListener {
         this.objListaEst = objListaEst;
         this.objEstudianteConsulta.jButton2.addActionListener(this);
        // this.objEstudianteConsulta.jTable1.add(objEstudianteConsulta);
-        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);
-        
-       
-            
+        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);         
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.objEstudianteConsulta.jButton2) {
             System.out.println("Escuchador del boton Agregar");
-            llenado();
-           /* DefaultTableModel objModeloTable = (DefaultTableModel) objEstudianteConsulta.jTable1.getModel(); //convertir por eso va lo de 
-            objModeloTable.addRow(new Object[]{"1", "1", "1", "1"});*/
-           
+            llenado();       
         }
-        
         if (e.getSource() == this.objEstudianteConsulta.jButton1Alta) {
              EstudianteAlta alta = new EstudianteAlta();
              alta.setSize(500,500);
@@ -70,8 +63,7 @@ public class ControladorConsultaEstudiante implements ActionListener {
                 objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
                 objListaEstudianteLocal.get(i).getEdad()});
         }
-      
-        
+            
     }
     
     
