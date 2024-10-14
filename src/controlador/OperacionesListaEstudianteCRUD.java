@@ -2,12 +2,12 @@ package controlador;
 
 import java.util.ArrayList;
 import modelo.CRUD;
-import modelo.EstudianteObj;
+import modelo.Estudiante;
 
 public class OperacionesListaEstudianteCRUD extends CRUD {
     
-    private ArrayList<EstudianteObj> objListaEstudiante;
-            EstudianteObj objEstudiante;
+    private ArrayList<Estudiante> objListaEstudiante;
+            Estudiante objEstudiante;
 
     public OperacionesListaEstudianteCRUD() {
             objListaEstudiante = new ArrayList<>();
@@ -34,15 +34,15 @@ public class OperacionesListaEstudianteCRUD extends CRUD {
     }
 
     // Getters y Setters
-    public EstudianteObj getObjEstudiante() {
+    public Estudiante getObjEstudiante() {
         return objEstudiante;
     }
 
-    public void setObjEstudiante(EstudianteObj objEstudiante) {
+    public void setObjEstudiante(Estudiante objEstudiante) {
         this.objEstudiante = objEstudiante;
     }
 
-    public ArrayList<EstudianteObj> getObjListaEstudiante() {
+    public ArrayList<Estudiante> getObjListaEstudiante() {
         return objListaEstudiante;
     }
     

@@ -8,13 +8,13 @@ package modelo;
  *
  * @author juare
  */
-public class EstudianteObj {
+public class Estudiante {
     private int matricula, edad;
     private String nombre, apPaterno, apMaterno;
-    public EstudianteObj(){
+    public Estudiante(){
         
     }
-    public EstudianteObj(int matricula, int edad, String nombre, String apPaterno, String apMaterno) {
+    public Estudiante(int matricula, int edad, String nombre, String apPaterno, String apMaterno) {
         this.matricula = matricula;
         this.edad = edad;
         this.nombre = nombre;

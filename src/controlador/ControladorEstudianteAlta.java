@@ -7,7 +7,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import modelo.EstudianteObj;
+import modelo.Estudiante;
 import vista.EstudianteAlta;
 import vista.EstudianteConsulta;
 
@@ -21,14 +21,16 @@ public class ControladorEstudianteAlta implements ActionListener  {
     EstudianteAlta objEstudianteAlta;
     OperacionesListaEstudianteCRUD objListaEstudiante;
     Validador objValidador;
-    EstudianteObj objEstudiante;
-    ArrayList<EstudianteObj> listaEst;
+    Estudiante objEstudiante;
+    ArrayList<Estudiante> listaEst;
     EstudianteConsulta objEstudianteConsulta;
-    
+    OperacionesBDEstudiante objOperacionesBD;
     ControladorConsultaEstudiante objConsulta;
+    
     public ControladorEstudianteAlta(EstudianteAlta objEstudianteAlta){
         listaEst = new ArrayList();
         objValidador = new Validador();
+        objOperacionesBD=new OperacionesBDEstudiante();
         this.objEstudianteAlta = objEstudianteAlta;
         this.objEstudianteAlta.jButton1.addActionListener(this);
         this.objEstudianteAlta.jButton2Consulta.addActionListener(this);
@@ -59,7 +61,7 @@ public class ControladorEstudianteAlta implements ActionListener  {
             if (!objValidador.validaCajaTextoEnteroEdad(objEstudianteAlta.getjTextField5())) {
                 return;
             }
-        objEstudiante = new EstudianteObj();
+        objEstudiante = new Estudiante();
        
         objEstudiante.setMatricula(Integer.parseInt(objEstudianteAlta.getjTextField1().getText()));
         objEstudiante.setNombre(objEstudianteAlta.getjTextField2().getText());
@@ -70,10 +72,10 @@ public class ControladorEstudianteAlta implements ActionListener  {
         objListaEstudiante.setObjEstudiante(objEstudiante);
         listaEst.add(objEstudiante);
         objListaEstudiante.create(); 
-        //this.objListaEstudiante.read();
         this.limpiar();
-        // this.imprimirLista();
-
+        objOperacionesBD.setObjEstudisnte(objEstudiante);
+        objOperacionesBD.create();
+        
         System.out.println("Valores del Objeto");
         System.out.println("Matricula: " + objEstudiante.getMatricula());
         
@@ -81,7 +83,7 @@ public class ControladorEstudianteAlta implements ActionListener  {
         if(e.getSource()==objEstudianteAlta.jButton2Consulta){
              if(objEstudianteConsulta == null){
                // objEstudianteConsulta = new EstudianteConsulta(this.objListaEstudiante);
-               objEstudianteConsulta = new EstudianteConsulta();
+                objEstudianteConsulta = new EstudianteConsulta();
                 objConsulta = new ControladorConsultaEstudiante(objEstudianteConsulta, objListaEstudiante);
                 objEstudianteConsulta.setSize(500, 500);
                 objEstudianteConsulta.setVisible(true);

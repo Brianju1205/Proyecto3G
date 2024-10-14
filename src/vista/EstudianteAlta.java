@@ -8,7 +8,7 @@ package vista;
 import controlador.ControladorEstudianteAlta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.EstudianteObj;
+import modelo.Estudiante;
 import controlador.Validador;
 import javax.swing.JTextField;
 import controlador.OperacionesListaEstudianteCRUD;
@@ -24,14 +24,14 @@ public class EstudianteAlta extends javax.swing.JFrame {
      * Creates new form Estudiante1
      */
     public Validador objValidador;
-    EstudianteObj objEstudiante;
-    ArrayList<EstudianteObj> listaEst;
+    Estudiante objEstudiante;
+    ArrayList<Estudiante> listaEst;
     ControladorEstudianteAlta objControlador;
     public EstudianteAlta() {
         initComponents();
         objControlador = new ControladorEstudianteAlta(this);
         objValidador = new Validador();
-        objEstudiante= new EstudianteObj();
+        objEstudiante= new Estudiante();
         listaEst = new ArrayList();
         
         

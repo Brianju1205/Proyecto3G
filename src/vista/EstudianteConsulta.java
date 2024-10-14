@@ -8,7 +8,7 @@ import controlador.ControladorConsultaEstudiante;
 import javax.swing.table.DefaultTableModel;
 import controlador.OperacionesListaEstudianteCRUD;
 import java.util.ArrayList;
-import modelo.EstudianteObj;
+import modelo.Estudiante;
 
 /**
  *
