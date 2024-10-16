@@ -26,7 +26,7 @@ public class EstudianteConsulta extends javax.swing.JFrame {
     //EstudianteObj objEstudiante;
     public EstudianteConsulta( ) {
         initComponents();
-        //objControladorEstudiante = new ControladorConsultaEstudiante(this);
+        objControladorEstudiante = new ControladorConsultaEstudiante(this);
              
     }
     /**

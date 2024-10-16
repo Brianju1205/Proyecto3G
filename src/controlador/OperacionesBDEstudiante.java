@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.CRUD;
 import modelo.Estudiante;
-import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class OperacionesBDEstudiante extends CRUD{
 
     Estudiante objEstudiante;
-    
     JavaPostgresSQL objJavaPostgresSQL;
+    
     public OperacionesBDEstudiante() {
         objJavaPostgresSQL =new JavaPostgresSQL();
         objJavaPostgresSQL.connectDatabase();
@@ -28,8 +28,9 @@ public class OperacionesBDEstudiante extends CRUD{
     @Override
     public void create() {
         try {
-          objJavaPostgresSQL.stmt.executeQuery("insert into estudiante values "
-                    + "("+objEstudiante.getMatricula()+",'"+objEstudiante.getNombre()+"');");
+            
+            objJavaPostgresSQL.stmt.execute("insert into estudiante values "
+                    + "("+objEstudiante.getMatricula()+",'"+objEstudiante.getNombre()+"');"); 
         } catch (SQLException ex) {
             Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,8 +38,27 @@ public class OperacionesBDEstudiante extends CRUD{
 
     @Override
     public ArrayList read() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Estudiante> objListaEstudiante=new ArrayList();
+        Estudiante objEstudiante;
+        
+        try {
+            ResultSet resultado=objJavaPostgresSQL.stmt.executeQuery("select * from estudiante");
+            while(resultado.next()){
+                objEstudiante = new Estudiante();
+                objEstudiante.setMatricula(resultado.getInt("matricula"));
+                objEstudiante.setNombre(resultado.getString("nombre"));
+                
+                
+                objListaEstudiante.add(objEstudiante);
+                System.out.println(""+resultado.getInt("matricula"));
+                System.out.println(""+resultado.getString("nombre"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return objListaEstudiante;
     }
+   
 
     @Override
     public void update() {

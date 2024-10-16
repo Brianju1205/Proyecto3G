@@ -22,21 +22,33 @@ public class ControladorConsultaEstudiante implements ActionListener {
     OperacionesListaEstudianteCRUD ObjEstudianteLista;
     Estudiante objEstudiante;
     OperacionesListaEstudianteCRUD objListaEst;
+    OperacionesBDEstudiante objBDEstudiante;
     
     public ControladorConsultaEstudiante(EstudianteConsulta objEstudianteConsulta,OperacionesListaEstudianteCRUD objListaEst) {
         this.objEstudianteConsulta = objEstudianteConsulta;
         this.ObjEstudianteLista= new OperacionesListaEstudianteCRUD();
         this.objListaEst = objListaEst;
+        objBDEstudiante= new OperacionesBDEstudiante();
+        
         this.objEstudianteConsulta.jButton2.addActionListener(this);
        // this.objEstudianteConsulta.jTable1.add(objEstudianteConsulta);
-        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);         
+        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);   
+        llenado();  
     }
-
+    public ControladorConsultaEstudiante(EstudianteConsulta objEstudianteConsulta) {
+        this.objEstudianteConsulta = objEstudianteConsulta;
+        objBDEstudiante= new OperacionesBDEstudiante();
+        
+        this.objEstudianteConsulta.jButton2.addActionListener(this);
+       // this.objEstudianteConsulta.jTable1.add(objEstudianteConsulta);
+        this.objEstudianteConsulta.jButton1Alta.addActionListener(this);   
+        llenado();  
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.objEstudianteConsulta.jButton2) {
             System.out.println("Escuchador del boton Agregar");
-            llenado();       
+                 
         }
         if (e.getSource() == this.objEstudianteConsulta.jButton1Alta) {
              EstudianteAlta alta = new EstudianteAlta();
@@ -56,12 +68,20 @@ public class ControladorConsultaEstudiante implements ActionListener {
     public void llenado(){
         DefaultTableModel modelo = (DefaultTableModel) objEstudianteConsulta.jTable1.getModel();
         modelo.setRowCount(0);
-        ArrayList<Estudiante> objListaEstudianteLocal =  objListaEst.read();
+       
+        ArrayList<Estudiante> objListaEstudianteLocal =  objBDEstudiante.read();
+        //ArrayList<Estudiante> objListaEstudianteLocal =  objListaEst.read();
         
+        /*
         for(int i=0;i<objListaEstudianteLocal.size(); i++){
             modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
                 objListaEstudianteLocal.get(i).getApPaterno(), objListaEstudianteLocal.get(i).getApMaterno(),
                 objListaEstudianteLocal.get(i).getEdad()});
+        }
+        */
+        for(int i=0;i<objListaEstudianteLocal.size(); i++){
+            modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
+                "","",""});
         }
             
     }
