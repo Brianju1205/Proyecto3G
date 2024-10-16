@@ -40,7 +40,7 @@ public class OperacionesBDEstudiante extends CRUD{
     public ArrayList read() {
         ArrayList<Estudiante> objListaEstudiante=new ArrayList();
         Estudiante objEstudiante;
-        
+        //utlizar prepareStatement
         try {
             ResultSet resultado=objJavaPostgresSQL.stmt.executeQuery("select * from estudiante");
             while(resultado.next()){
