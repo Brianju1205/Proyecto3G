@@ -81,7 +81,8 @@ public class ControladorConsultaEstudiante implements ActionListener {
         */
         for(int i=0;i<objListaEstudianteLocal.size(); i++){
             modelo.addRow(new Object[]{objListaEstudianteLocal.get(i).getMatricula(), objListaEstudianteLocal.get(i).getNombre(),
-                "","",""});
+                objListaEstudianteLocal.get(i).getApPaterno(),objListaEstudianteLocal.get(i).getApMaterno(),objListaEstudianteLocal.get(i).getEdad(),
+                "","","",""});
         }
             
     }

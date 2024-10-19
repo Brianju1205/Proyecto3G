@@ -6,6 +6,7 @@ package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 /** 
@@ -20,7 +21,7 @@ public class JavaPostgresSQL {
      */
     public Connection connection = null;
     public  Statement stmt = null;
-   
+   // public PreparedStatement preparedStatement = null;
     public void connectDatabase() {
         try {
             // We register the PostgreSQL driver
@@ -36,7 +37,10 @@ public class JavaPostgresSQL {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://127.0.0.1/postgres",
                     "postgres", "1234");
+            
             stmt = connection.createStatement();
+            
+          // preparedStatement = connection.prepareStatement(string);
 
             boolean valid = connection.isValid(50000);
             System.out.println(valid ? "TEST OK" : "TEST FAIL");

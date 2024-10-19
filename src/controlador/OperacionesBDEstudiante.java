@@ -4,6 +4,7 @@
  */
 package controlador;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.CRUD;
@@ -19,7 +20,7 @@ public class OperacionesBDEstudiante extends CRUD{
 
     Estudiante objEstudiante;
     JavaPostgresSQL objJavaPostgresSQL;
-    
+    PreparedStatement preparedStatement = null;
     public OperacionesBDEstudiante() {
         objJavaPostgresSQL =new JavaPostgresSQL();
         objJavaPostgresSQL.connectDatabase();
@@ -27,22 +28,45 @@ public class OperacionesBDEstudiante extends CRUD{
     
     @Override
     public void create() {
-        try {
+       /* try {
             
-            objJavaPostgresSQL.stmt.execute("insert into estudiante values "
+            objJavaPostgresSQL.preparedStatement.execute("insert into estudiante values "
                     + "("+objEstudiante.getMatricula()+",'"+objEstudiante.getNombre()+"');"); 
         } catch (SQLException ex) {
             Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }*/
+        /*String sql ="insert into estudiante (matricula,nombre) values(?,?)";
+        
+        try (PreparedStatement preparedStatement = objJavaPostgresSQL.connection.prepareStatement(sql)){
+            
+            
+            preparedStatement.setInt(1, objEstudiante.getMatricula());
+            preparedStatement.setString(2, objEstudiante.getNombre());
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        try {
+            preparedStatement = objJavaPostgresSQL.connection.prepareStatement("insert into estudiante (matricula, nombre, apepaterno, apematerno) values (?, ?, ?, ?)");
+            preparedStatement.setInt(1, objEstudiante.getMatricula());
+            preparedStatement.setString(2, objEstudiante.getNombre());
+            preparedStatement.setString(3, objEstudiante.getApPaterno());
+            preparedStatement.setString(4, objEstudiante.getApMaterno());
+            //preparedStatement.setInt(5, objEstudiante.getEdad());
+            
+            int  rowCount = preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+}
     }
-
     @Override
     public ArrayList read() {
-        ArrayList<Estudiante> objListaEstudiante=new ArrayList();
+       /* ArrayList<Estudiante> objListaEstudiante=new ArrayList();
         Estudiante objEstudiante;
+        String sql = "select * from estudiante";*/
         //utlizar prepareStatement
-        try {
-            ResultSet resultado=objJavaPostgresSQL.stmt.executeQuery("select * from estudiante");
+       /* try {
+            ResultSet resultado=objJavaPostgresSQL.preparedStatement.executeQuery("select * from estudiante");
             while(resultado.next()){
                 objEstudiante = new Estudiante();
                 objEstudiante.setMatricula(resultado.getInt("matricula"));
@@ -55,10 +79,31 @@ public class OperacionesBDEstudiante extends CRUD{
             }
         } catch (SQLException ex) {
             Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+       
+       ArrayList<Estudiante> objListaEstudiante = new ArrayList<>();
+
+        try {
+           // preparedStatement = objJavaPostgresSQL.connection.prepareStatement("select * from estudiante");
+            ResultSet resultado = objJavaPostgresSQL.stmt.executeQuery("select * from estudiante");
+            while (resultado.next()) {
+                objEstudiante = new Estudiante();
+                objEstudiante.setMatricula(resultado.getInt("matricula"));
+                objEstudiante.setNombre(resultado.getString("nombre"));
+                objEstudiante.setApPaterno(resultado.getString("apepaterno"));
+                objEstudiante.setApMaterno(resultado.getString("apematerno"));
+                //objEstudiante.setEdad(resultado.getInt("apepaterno"));
+                objListaEstudiante.add(objEstudiante);
+
+                System.out.println("" + resultado.getInt("matricula"));
+                System.out.println("" + resultado.getString("nombre"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacionesBDEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
         return objListaEstudiante;
+    
     }
-   
 
     @Override
     public void update() {
